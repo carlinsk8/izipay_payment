@@ -138,7 +138,7 @@ Future<void> initPaymentIzipay() async {
         "primaryColor": "#333399",
         "secondaryColor": "#333399",
         "tertiaryColor": "#333399",
-        "logoUrl": "https://guinea.pe/wp-content/uploads/2024/05/08.png"
+        "logoUrl": "https://logowik.com/content/uploads/images/shopping-cart5929.jpg"
       }
     };
     final paymentConfig = PaymentConfig.fromJson(config);
