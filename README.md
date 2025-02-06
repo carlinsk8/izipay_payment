@@ -99,8 +99,8 @@ Future<void> initPaymentIzipay() async {
     final config = {
       "environment": "SBOX", // SBOX, TEST, PROD
       "action": "register",
-      "clientId": "VErethUtraQuxas57wuMuquprADrAHAb",
-      "merchantId": "4004353",
+      "clientId": "<CODIGO DE COMERCIO>",
+      "merchantId": "<public key>",
       "order": {
         "currency": "PEN",
         "amount": "11.00",
@@ -167,7 +167,7 @@ Future<void> initPaymentIzipay() async {
     "millis": 34674
   },
   "response": {
-    "merchantCode": "4004353",
+    "merchantCode": "<public key>",
     "facilitatorCode": "",
     "merchantBuyerId": "MB101738852840885",
     "card": {

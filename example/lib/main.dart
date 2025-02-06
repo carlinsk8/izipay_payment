@@ -25,8 +25,8 @@ class _MyAppState extends State<MyApp> {
     final config = {
       "environment": "SBOX",//TEST o PROD o SBOX
       "action": "register",
-      "clientId": "VErethUtraQuxas57wuMuquprADrAHAb",
-      "merchantId": "4004353",
+      "clientId": "<CODIGO DE COMERCIO>",
+      "merchantId": "<public key>",
       "order": {
         "currency": "PEN",
         "amount": "11.00",
