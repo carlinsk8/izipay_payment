@@ -1,0 +1,140 @@
+group = "com.izipay.payment.izipay_payment"
+version = "1.0-SNAPSHOT"
+
+buildscript {
+    ext.kotlin_version = "1.8.22"
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.44")
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs project(':izipay_payment').file('libs')
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize' //apply plugin: 'kotlin-android-extensions'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace = "com.izipay.payment.izipay_payment"
+    }
+
+    compileSdk = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
+    }
+
+    defaultConfig {
+        minSdk = 21
+    }
+
+    dependencies {
+        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation("org.mockito:mockito-core:5.0.0")
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+}
+dependencies {
+    /**
+     * Integración con Android - Paso 3
+     * https://developers.izipay.pe/android-core/integration-with-android/#paso-5-agregar-archivo-hiltandroidapp
+     * Actualizado al 20-11-2024
+     */
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.activity:activity-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation "androidx.fragment:fragment-ktx:1.5.7" // Para usar registerForActivityResult en Fragment
+
+    //Librerias heredadas
+    implementation(name: "izipay-sdk-2.0.0", ext: 'aar')
+
+    //Dagger Hilt
+    // implementation "com.google.dagger:hilt-android:2.44"
+    // kapt "com.google.dagger:hilt-compiler:2.44"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    // Otras dependencias
+    implementation "com.github.skydoves:balloon:1.5.2"
+    implementation "com.google.code.gson:gson:2.10.1"
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation "com.github.skydoves:powerspinner:1.2.4"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    /**
+     * Integración con Android - Paso 6
+     * https://developers.izipay.pe/android-core/integration-with-android/#paso-6-integraci%C3%B3n-con-librer%C3%ADas-de-sensory-branding
+     * */
+    implementation(name: "sonic-sdk-release-1.4.0", ext: 'aar')
+    implementation(name: "visa-sensory-branding-2.1", ext: 'aar')
+
+
+    /**
+     * Integración con Cybersource - Paso 1
+     * https://developers.izipay.pe/android-core/integration-with-cybersource/#paso-1-integraci%C3%B3n-de-bibliotecas
+     */
+    implementation(name: "TMXAuthentication-RL-6.3-77", ext: 'aar')
+    implementation(name: "TMXBehavioralBiometrics-RL-6.3-77", ext: 'aar')
+    implementation(name: "TMXDeviceSecurityHealth-RL-6.3-77", ext: 'aar')
+    implementation(name: "TMXProfilingConnections-RL-6.3-77", ext: 'aar')
+    implementation(name: "TMXProfiling-RL-6.3-77", ext: 'aar')
+}
