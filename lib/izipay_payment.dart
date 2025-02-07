@@ -1,15 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class IzipayPayment {
   static const MethodChannel _channel = MethodChannel('izipay_payment_flutter');
-  
+
   Future<String> startPayment(PaymentConfig config) async {
     try {
       final response = await _channel.invokeMethod('startPayment', config.toJson());
-      print('Payment response: $response');
+      if (kDebugMode) {
+        print('Payment response: $response');
+      }
       return '$response';
     } on PlatformException catch (e) {
-      print("Error initiating payment: ${e.message}");
+      if (kDebugMode) {
+        print("Error initiating payment: ${e.message}");
+      }
       return e.message ?? 'Error initiating payment';
     }
   }
@@ -18,7 +23,9 @@ class IzipayPayment {
     _channel.setMethodCallHandler((call) async {
       if (call.method == 'paymentResult') {
         String paymentResponse = call.arguments;
-        print("Payment response: $paymentResponse");
+        if (kDebugMode) {
+          print("Payment response: $paymentResponse");
+        }
       }
     });
   }

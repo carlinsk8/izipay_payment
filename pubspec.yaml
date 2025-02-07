@@ -1,7 +1,10 @@
 name: izipay_payment
 description: "A plugin for integrating izipay payment gateway in flutter"
-version: 0.0.1
-homepage:
+version: 1.0.0
+maintainer: Carlos España (@creegplay)
+homepage: https://github.com/carlinsk8/izipay_payment
+repository: https://github.com/carlinsk8/izipay_payment
+issue_tracker: https://github.com/carlinsk8/izipay_payment/issues
 
 environment:
   sdk: ^3.5.2
