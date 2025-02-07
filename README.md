@@ -22,6 +22,11 @@ This package supports the following platforms:
 This plugin is designed to work exclusively on **Android** and **iOS**.  
 For more details, refer to the official documentation.  
 
+<p align="center">
+  <img src="assets/screenshot/form_android.jpg" width="45%" alt="Android Form">
+  <img src="assets/screenshot/form_ios.jpg" width="45%" alt="iOS Form">
+</p>
+
 
 ## 🚀 Configuration on Android
 
