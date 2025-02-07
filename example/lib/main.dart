@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:izipay_payment/izipay_payment.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   // Inicialización de pago
   Future<void> initPaymentIzipay() async {
     final config = {
-      "environment": "SBOX",//TEST o PROD o SBOX
+      "environment": "SBOX", //TEST o PROD o SBOX
       "action": "register",
       "clientId": "<CODIGO DE COMERCIO>",
       "merchantId": "<public key>",
@@ -64,7 +63,8 @@ class _MyAppState extends State<MyApp> {
         "primaryColor": "#333399",
         "secondaryColor": "#333399",
         "tertiaryColor": "#333399",
-        "logoUrl": "https://logowik.com/content/uploads/images/shopping-cart5929.jpg"
+        "logoUrl":
+            "https://logowik.com/content/uploads/images/shopping-cart5929.jpg"
       }
     };
     final paymentConfig = PaymentConfig.fromJson(config);
