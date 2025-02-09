@@ -71,66 +71,69 @@ public class IzipayPaymentPlugin: NSObject, FlutterPlugin, IzipayPaymentDelegate
     }
 
     public func getPaymentResult(_ paymentResult: IzipayPayButtonSDK.PaymentResult) {
-        print("Código: \(paymentResult.code ?? "N/A")")
-        print("Mensaje: \(paymentResult.message ?? "N/A")")
-        // Crear el diccionario con los datos
-        let dataMap: [String: Any] = [
-            "code": paymentResult.code ?? "N/A",
-            "message": paymentResult.message ?? "N/A",
-            "header": [
-            "transactionStartDatetime": transactionStartDatetime!,
-              "transactionEndDatetime": getCurrentTimestamp(),
-            "millis": calculateMillis(start: transactionStartDatetime!, end: getCurrentTimestamp())
-            ],
-            "response": [
-                "merchantCode": paymentResult.response?.merchant?.merchantCode ?? "N/A",
-              "facilitatorCode": "",
-                "merchantBuyerId": paymentResult.response?.token?.merchantBuyerId ?? "N/A",
-              "card": [
-                "brand": paymentResult.response?.card?.brand ?? "N/A",
-                "pan": paymentResult.response?.card?.pan ?? "N/A"
-              ],
-              "token": [
-                "token": paymentResult.response?.token?.cardToken ?? "N/A"
-              ]
-            ],
-            "result": [
-              "messageFriendly": paymentResult.message ?? "N/A"
-            ]
-        ]
+    print("Código: \(paymentResult.code ?? "N/A")")
+    print("Mensaje: \(paymentResult.message ?? "N/A")")
 
-        // Convertir a JSON
-        var result = ""
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dataMap, options: .prettyPrinted)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
-                result = jsonString
-            }
-        } catch {
-            print("Error al convertir el diccionario a JSON: \(error.localizedDescription)")
-        }
+    let header: [String: Any] = [
+        "transactionStartDatetime": transactionStartDatetime!,
+        "transactionEndDatetime": getCurrentTimestamp(),
+        "millis": calculateMillis(start: transactionStartDatetime!, end: getCurrentTimestamp())
+    ]
 
-        if let paymentResultCode = paymentResult.code, paymentResultCode == "00" {
-            if paymentResult.response != nil {
-                print("Transacción exitosa. \(paymentResult.response?.description ?? "N/A")")
-                if paymentResult.response != nil {
-                    sendResult(data: result,message: paymentResult.message)
-                } else {
-                    sendResult(data: "", message: "Error: response is nil")
-                }
-            } else {
-                if paymentResult.response != nil {
-                    sendResult(data: result,message: paymentResult.message)
-                } else {
-                    sendResult(data: "", message: "Error: response is nil")
-                }
-            }
-        } else {
-            print("Operación no completada o rechazada. Consultar/anular orden.")
-            sendResult(data: result,message: paymentResult.message)
+    let card: [String: Any] = [
+        "brand": paymentResult.response?.card?.brand ?? "N/A",
+        "pan": paymentResult.response?.card?.pan ?? "N/A"
+    ]
+
+    let token: [String: Any] = [
+        "cardToken": paymentResult.response?.token?.cardToken ?? "N/A"
+    ]
+
+    let response: [String: Any] = [
+        "merchantCode": paymentResult.response?.merchant?.merchantCode ?? "N/A",
+        "facilitatorCode": "",
+        "merchantBuyerId": paymentResult.response?.token?.merchantBuyerId ?? "N/A",
+        "card": card,
+        "token": token,
+        "transactionId": paymentResult.transactionId ?? "N/A",
+        "orderNumber": paymentResult.response?.order?.first?.orderNumber ?? "N/A"
+    ]
+
+    let resultMap: [String: Any] = [
+        "messageFriendly": paymentResult.message ?? "N/A"
+    ]
+
+    let dataMap: [String: Any] = [
+        "code": paymentResult.code ?? "N/A",
+        "message": paymentResult.message ?? "N/A",
+        "header": header,
+        "response": response,
+        "result": resultMap
+    ]
+
+    var result = ""
+    do {
+        let jsonData = try JSONSerialization.data(withJSONObject: dataMap, options: .prettyPrinted)
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            print(jsonString)
+            result = jsonString
         }
+    } catch {
+        print("Error al convertir el diccionario a JSON: \(error.localizedDescription)")
     }
+
+    if let paymentResultCode = paymentResult.code, paymentResultCode == "00" {
+        if paymentResult.response != nil {
+            print("Transacción exitosa. \(paymentResult.response?.description ?? "N/A")")
+            sendResult(data: result, message: paymentResult.message)
+        } else {
+            sendResult(data: "", message: "Error: response is nil")
+        }
+    } else {
+        print("Operación no completada o rechazada. Consultar/anular orden.")
+        sendResult(data: result, message: paymentResult.message)
+    }
+}
     
     public func executeProfiling(_ params: IzipayPayButtonSDK.ScoringParams) {
         // Implementar según sea necesario
