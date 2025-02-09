@@ -19,6 +19,9 @@ class IzipayPayment {
       if (kDebugMode) {
         print('Payment response: $response');
       }
+      if (Platform.isIOS) {
+        return response[0];
+      }
       return '$response';
     } on PlatformException catch (e) {
       if (kDebugMode) {

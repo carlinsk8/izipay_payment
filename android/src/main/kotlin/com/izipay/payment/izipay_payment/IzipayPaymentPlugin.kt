@@ -225,7 +225,7 @@ PluginRegistry.ActivityResultListener{
             val merchant = response?.optJSONObject("merchant")
             val card = response?.optJSONObject("card")
             val token = response?.optJSONObject("token")
-            
+            val order = response?.optJSONArray("order")?.optJSONObject(0)
             val dataMap = mapOf(
                 "code" to jsonData.optString("code"),
                 "message" to jsonData.optString("message"),
@@ -244,8 +244,10 @@ PluginRegistry.ActivityResultListener{
                             "pan" to (card?.optString("pan", "") ?: "")
                         ),
                         "token" to mapOf(
-                            "token" to (token?.optString("cardToken", "") ?: "")
-                        )
+                            "cardToken" to (token?.optString("cardToken", "") ?: "")
+                        ),
+                        "transactionId" to (jsonData?.optString("transactionId", "") ?: ""),
+                        "orderNumber" to (order?.optString("orderNumber", "") ?: ""),
                     )
                 } else {
                     emptyMap() // Si no hay respuesta, dejar vacío
