@@ -9,3 +9,11 @@
 ## 1.0.2
 
 * TODO: Add anotaciones de release.
+
+## 1.0.3
+
+* TODO: necessary parameters were added: transactionId, orderNumber.
+
+* TODO: improved json display.
+
+

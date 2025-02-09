@@ -23,8 +23,8 @@ This plugin is designed to work exclusively on **Android** and **iOS**.
 For more details, refer to the official documentation.  
 
 <p align="center">
-  <img src="assets/screenshot/form_android.jpg" width="45%" alt="Android Form">
-  <img src="assets/screenshot/form_ios.jpg" width="45%" alt="iOS Form">
+  <img src="https://github.com/carlinsk8/izipay_payment/blob/main/assets/screenshot/form_android.jpg" width="45%" alt="Android Form">
+  <img src="https://github.com/carlinsk8/izipay_payment/blob/main/assets/screenshot/form_ios.jpg" width="45%" alt="iOS Form">
 </p>
 
 
@@ -195,8 +195,10 @@ Future<void> initPaymentIzipay() async {
     "pan": "497010**0014"
    },
    "token": {
-    "token": "118ea63399a6fb4e06d41789189d1bc8bf480f6470be169ba2b54c70d36cfd94"
-   }
+    "cardToken": "118ea63399a6fb4e06d41789189d1bc8bf480f6470be169ba2b54c70d36cfd94"
+   },
+   "transactionId":"DMKTL1738960727033",
+    "orderNumber":"1738960727033"
   },
   "result": {
    "messageFriendly": "Operación exitosa"

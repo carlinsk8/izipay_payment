@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:izipay_payment/izipay_payment.dart';
 
 void main() {
@@ -24,8 +25,8 @@ class _MyAppState extends State<MyApp> {
     final config = {
       "environment": "SBOX", //TEST o PROD o SBOX
       "action": "register",
-      "clientId": "<CODIGO DE COMERCIO>",
-      "merchantId": "<public key>",
+      "clientId": "VErethUtraQuxas57wuMuquprADrAHAb",
+      "merchantId": "4004353",
       "order": {
         "currency": "PEN",
         "amount": "11.00",
@@ -97,7 +98,17 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ],
               ),
-              Text(response),
+              if(response.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: JsonView.string(
+                  response,
+                  theme: const JsonViewTheme(
+                    backgroundColor: Colors.black12,
+                    keyStyle: TextStyle(color: Colors.blue),
+                    stringStyle: TextStyle(color: Colors.red),
+                ),),
+              ),
               if (response.isNotEmpty)
                 Builder(
                   builder: (context) => TextButton(
