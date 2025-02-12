@@ -1,6 +1,6 @@
 name: izipay_payment
 description: "A Flutter package to tokenize payment methods with Izipay. Integrates the native SDK to facilitate its use and improve the payment experience."
-version: 1.0.3
+version: 1.1.0
 maintainer: Carlos España (@creegplay)
 homepage: https://github.com/carlinsk8/izipay_payment
 repository: https://github.com/carlinsk8/izipay_payment

@@ -16,4 +16,9 @@
 
 * TODO: improved json display.
 
+## 1.1.0
+
+* TODO: refactor: parameters are added to the response
+* TODO: update: readme is updated
+
 
