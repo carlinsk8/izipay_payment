@@ -46,11 +46,6 @@ dependencies {
    implementation "com.google.dagger:hilt-android:2.44"
    kapt "com.google.dagger:hilt-compiler:2.44"
 }
-
-javaCompileOptions {
-   sourceCompatibility JavaVersion.VERSION_17
-   targetCompatibility JavaVersion.VERSION_17
-}
 ```
 
 ### 3. Configure `settings.gradle`
@@ -66,6 +61,7 @@ plugins {
 Create the file `SDKExampleApp.kt` at the path `android/app/src/main/kotlin/{your_package}/SDKExampleApp.kt`:
 
 ```kotlin
+package com.izipay.payment.izipay_payment_example
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
@@ -162,6 +158,7 @@ Future<void> initPaymentIzipay() async {
     }
    };
    final paymentConfig = PaymentConfig.fromJson(config);
+   final _izipayPaymentFlutterPlugin = IzipayPayment();
    try {
     response = await _izipayPaymentFlutterPlugin.startPayment(paymentConfig);
     // Send the response to the service
@@ -179,30 +176,31 @@ Future<void> initPaymentIzipay() async {
 
 ```json
 {
-  "code": "00",
-  "message": "OK",
-  "header": {
-   "transactionStartDatetime": "2025-02-06 09:40:40.879",
-   "transactionEndDatetime": "2025-02-06 09:41:15.552",
-   "millis": 34674
-  },
-  "response": {
-   "merchantCode": "<public key>",
-   "facilitatorCode": "",
-   "merchantBuyerId": "MB101738852840885",
-   "card": {
-    "brand": "VS",
-    "pan": "497010**0014"
-   },
-   "token": {
-    "cardToken": "118ea63399a6fb4e06d41789189d1bc8bf480f6470be169ba2b54c70d36cfd94"
-   },
-   "transactionId":"DMKTL1738960727033",
-    "orderNumber":"1738960727033"
-  },
-  "result": {
-   "messageFriendly": "Operación exitosa"
-  }
+	"code": "00",
+	"message": "Operación exitosa",
+	"response": {
+		"orderNumber": "10366493777",
+		"merchantBuyerId": "MB10366493777",
+		"token": {
+			"cardToken": "4e5e7a5244f68b22bf1907aa4fd99154d1689f17adff2e2d4993d2febada41a0"
+		},
+		"card": {
+			"brand": "VS",
+			"pan": "497010******0014"
+		},
+		"merchantCode": "4004353",
+		"transactionId": "366493777",
+		"facilitatorCode": ""
+	},
+	"header": {
+		"transactionStartDatetime": "2025-02-12 12:39:32.902",
+		"millis": 47216,
+		"transactionEndDatetime": "2025-02-12 12:40:20.118"
+	},
+	"result": {
+		"messageFriendly": "Operación exitosa"
+	},
+	"payload": "{\"code\":\"00\",\"message\":\"Operación exitosa\",\"messageUser\":\"Operación exitosa\",\"messageUserEng\":\"Successful\",\"transactionId\":\"366493777\",\"response\":{\"payMethod\":\"CARD\",\"order\":[{\"payMethodAuthorization\":\"CARD\",\"codeAuth\":\"\",\"currency\":\"PEN\",\"amount\":\"11.00\",\"installment\":\"00\",\"deferred\":\"0\",\"orderNumber\":\"10366493777\",\"stateMessage\":\"Autorizado\",\"dateTransaction\":\"20250212\",\"timeTransaction\":\"124013\",\"uniqueId\":\"\",\"referenceNumber\":\"\"}],\"card\":{\"brand\":\"VS\",\"pan\":\"497010******0014\",\"save\":\"true\"},\"billing\":{\"firstName\":\"Quispe\",\"lastName\":\"Juan\",\"email\":\"example@gmail.com\",\"phoneNumber\":\"989339999\",\"street\":\"Av. flores\",\"city\":\"Lima\",\"state\":\"Lima\",\"country\":\"PE\",\"postalCode\":\"33065\",\"documentType\":\"DNI\",\"document\":\"55555555\"},\"merchant\":{\"merchantCode\":\"4004353\",\"facilitatorCode\":\"\"},\"token\":{\"merchantBuyerId\":\"MB10366493777\",\"cardToken\":\"4e5e7a5244f68b22bf1907aa4fd99154d1689f17adff2e2d4993d2febada41a0\",\"alias\":\"\"},\"authentication\":{\"result\":\"\"},\"customFields\":[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],\"miles\":{\"netMiles\":\"\",\"miles\":\"\"}}}"
 }
 ```
 

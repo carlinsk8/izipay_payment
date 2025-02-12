@@ -73,7 +73,7 @@ public class IzipayPaymentPlugin: NSObject, FlutterPlugin, IzipayPaymentDelegate
     public func getPaymentResult(_ paymentResult: IzipayPayButtonSDK.PaymentResult) {
     print("Código: \(paymentResult.code ?? "N/A")")
     print("Mensaje: \(paymentResult.message ?? "N/A")")
-
+    let payload = paymentResult.payloadHttp
     let header: [String: Any] = [
         "transactionStartDatetime": transactionStartDatetime!,
         "transactionEndDatetime": getCurrentTimestamp(),
@@ -108,6 +108,7 @@ public class IzipayPaymentPlugin: NSObject, FlutterPlugin, IzipayPaymentDelegate
         "message": paymentResult.message ?? "N/A",
         "header": header,
         "response": response,
+        "payload": payload ?? "N/A",
         "result": resultMap
     ]
 
