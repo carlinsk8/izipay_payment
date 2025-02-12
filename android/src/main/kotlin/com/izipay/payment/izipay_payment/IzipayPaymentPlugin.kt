@@ -219,7 +219,7 @@ PluginRegistry.ActivityResultListener{
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         if (requestCode == EXPECTED_REQUEST_CODE) {
             val dataPayLoad = data?.extras?.getString(ContainerActivity.RESPONSEPAYLOAD)
-            println(dataPayLoad!!)
+            
             val jsonData = JSONObject(dataPayLoad)
             val response = jsonData.optJSONObject("response")
             val merchant = response?.optJSONObject("merchant")
@@ -252,13 +252,11 @@ PluginRegistry.ActivityResultListener{
                 } else {
                     emptyMap() // Si no hay respuesta, dejar vacío
                 },
+                "payload" to jsonData.optString("payloadHttp", ""),
                 "result" to mapOf(
                     "messageFriendly" to jsonData.optString("messageUser", "")
                 )
             )
-
-            // val jsonObject = JSONObject(dataMap)
-            // println(jsonObject.toString(4)) // Formateado con 4 espacios de indentación
 
             val gson = Gson()
             val jsonGson = gson.toJson(dataMap)

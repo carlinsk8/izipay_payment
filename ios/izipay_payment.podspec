@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 IZIPAY Payment Flutter Plugin.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'http://creegplay.dev'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'creegplay' => 'carlin.08.12@gmail.com' }
   s.source           = { :path => '.' }
