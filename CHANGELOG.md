@@ -21,4 +21,11 @@
 * TODO: refactor: parameters are added to the response
 * TODO: update: readme is updated
 
+## 1.2.0
+
+* Featrue: add additional project files and configuration for multiple architectures
+* Update: upgrade CocoaPods to 1.16.2 and enable GPU validation mode
+* Update: bump version to 1.2.0
+
+
 
