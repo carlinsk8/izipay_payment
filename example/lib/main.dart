@@ -98,17 +98,18 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ],
               ),
-              if(response.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: JsonView.string(
-                  response,
-                  theme: const JsonViewTheme(
-                    backgroundColor: Colors.black12,
-                    keyStyle: TextStyle(color: Colors.blue),
-                    stringStyle: TextStyle(color: Colors.red),
-                ),),
-              ),
+              if (response.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: JsonView.string(
+                    response,
+                    theme: const JsonViewTheme(
+                      backgroundColor: Colors.black12,
+                      keyStyle: TextStyle(color: Colors.blue),
+                      stringStyle: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
               if (response.isNotEmpty)
                 Builder(
                   builder: (context) => TextButton(

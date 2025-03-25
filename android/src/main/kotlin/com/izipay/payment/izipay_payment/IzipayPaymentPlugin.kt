@@ -24,7 +24,7 @@ import java.util.*
 /** IzipayPaymentPlugin */
 class IzipayPaymentPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
 PluginRegistry.ActivityResultListener{
-  private var channel: MethodChannel? = null
+    private var channel: MethodChannel? = null
     private var channelResult: MethodChannel.Result? = null
     private var activity: FlutterActivity? = null
     private var flutterBinding: FlutterPlugin.FlutterPluginBinding? = null
@@ -36,15 +36,18 @@ PluginRegistry.ActivityResultListener{
     companion object {
         const val CHANNEL_NAME = "izipay_payment_flutter"
         const val EXPECTED_REQUEST_CODE = 1001
+        
 
-        @JvmStatic
-        fun registerWith(registrar: PluginRegistry.Registrar) {
-            val channel = MethodChannel(registrar.messenger(), CHANNEL_NAME)
-            channel.setMethodCallHandler(IzipayPaymentPlugin())
-        }
+        // @JvmStatic
+        // fun registerWith(registrar: PluginRegistry.Registrar) {
+        //     val channel = MethodChannel(registrar.messenger(), CHANNEL_NAME)
+        //     channel.setMethodCallHandler(IzipayPaymentPlugin())
+        // }
     }
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, CHANNEL_NAME)
+        channel?.setMethodCallHandler(this)
         flutterBinding = flutterPluginBinding
     }
 
