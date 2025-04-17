@@ -27,5 +27,7 @@
 * Update: upgrade CocoaPods to 1.16.2 and enable GPU validation mode
 * Update: bump version to 1.2.0
 
+## 1.3.0  
 
+* Update: migrated to the latest Dart version.
 
