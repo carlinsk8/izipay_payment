@@ -1,0 +1,1 @@
+/Users/carlos/Documents/Develoment/pub_dev/izipay_payment/example/build/app/intermediates/cxx/Debug/231e6tsu/obj/x86_64
